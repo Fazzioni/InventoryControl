@@ -1,0 +1,101 @@
+Menu principal:
+	clientes
+	mercadorias
+	pedidos
+	contas
+	agenda
+	configurações
+	backup
+
+
+
+clientes
+	novo
+	editar
+	pesquisar
+	listar
+	excluir
+	gerar relatorio
+	colunas
+	fonte
+mercadorias
+	.novo
+	.editar
+	.pesquisar
+	.listar
+	.excluir
+	.gerar relatorio
+	.colunas
+	.fonte
+pedidos
+	.novo
+	.editar
+	.pesquisar
+	.listar
+	.excluir
+	.gerar relatorio
+	.colunas
+	.fonte
+contas
+	.novo
+	.editar
+	.pesquisar
+	.listar
+	.excluir
+	.gerar relatorio
+	.colunas
+	.fonte
+	contas
+agenda
+	.novo
+	.editar
+	.pesquisar
+	.listar
+	.excluir
+	.gerar relatorio
+	.colunas
+	.fonte
+config
+backup
+
+_________
+functionarios:
+	.novo
+	.editar
+	.pesquisar
+	.listar
+	.excluir
+	.relatorio
+	.coluna
+	.fonte
+parcelamento
+	.novo
+	.editar
+	.listar
+	.excluir
+
+
+depend:
+	component -> install component: unit file name ( set directory )
+	report builder
+	access
+	rx libray 2.75
+
+	
+
+-> senha do banco de dados
+-> repeticao de imagens
+-> tabulação
+-> Todas as tabelas são abertas ao inciar
+-> sem indexação
+-> banco de dados sem trigger
+-> Não há necesssidade de criar uma tabela com cidadade,estado. (Trade entre memoria e processamento)
+
+
+
+
+
+
+ 
+	 
+ 

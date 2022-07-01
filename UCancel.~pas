@@ -1,0 +1,205 @@
+unit UCancel;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ComCtrls, ExtCtrls;
+
+type
+  TFcancel = class(TForm)
+    ProgressBar1: TProgressBar;
+    Label1: TLabel;
+    Label2: TLabel;
+    Timer1: TTimer;
+    procedure Timer1Timer(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+  private
+    { Private declarations }
+  public
+    Estagio : Byte;
+
+    { Public declarations }
+  end;
+
+var
+  Fcancel: TFcancel;
+
+implementation
+
+uses Ufinaliza, UDados;
+
+{$R *.dfm}
+
+procedure TFcancel.Timer1Timer(Sender: TObject);
+var
+  i : integer;
+begin
+if Estagio = 0 then
+FFinaliza.Visible := false;
+
+inc(Estagio);
+
+IF Estagio = 1 then
+begin
+  Fcancel.Label1.Caption := 'Alterando tabela Pagamento';
+  Fcancel.ProgressBar1.Position := Fcancel.ProgressBar1.Position +1;
+
+  for i := 0 to FFinaliza.Lista_Cod_Pag.Count -1 do
+  begin
+{//  Banco.TB_Pagamento.close;
+  Banco.TB_Pagamento.sql.clear;
+  Banco.TB_Pagamento.SQL.Add('Select * from pagamento');
+  Banco.TB_Pagamento.SQL.Add('Where codigo ='+FFinaliza.Lista_Cod_Pag[i]);
+  Banco.TB_Pagamento.Open;
+
+  if Banco.TB_Pagamento.RecordCount > 0 then
+  Banco.TB_Pagamento.Delete;
+ }
+  Fcancel.ProgressBar1.Position := Fcancel.ProgressBar1.Position +1;
+  Application.ProcessMessages;
+
+  end;
+end;
+
+
+
+If Estagio = 2 then
+begin
+Fcancel.ProgressBar1.Position := Fcancel.ProgressBar1.Position +1;
+Fcancel.Label1.Caption := 'Alterando tabela de Estoque';
+
+For i := 0 to FFinaliza.Mer_Cod.Count -1 do
+begin
+{Banco.TBEstoque.Close;
+Banco.TBEstoque.SQL.Clear;
+Banco.TBEstoque.SQL.Add('Select * from Estoque');
+Banco.TBEstoque.SQL.Add('Where codigo = '+FFinaliza.Mer_Cod[i] );
+Banco.TBEstoque.Open;}
+
+Banco.TB_Vendas_All.Insert;
+Banco.TB_Vendas_AllID_mercadoria.Value := Banco.TBEstoqueCodigo.Value;
+Banco.TB_Vendas_AllID_Pedido.Value := FFinaliza.Pedido;
+Banco.TB_Vendas_AllQtd.Value := StrToFloat(FFinaliza.Mer_qtd[i]);
+Banco.TB_Vendas_AllValor_un.Value := StrToFloat(FFinaliza.Mer_un[i]);;
+Banco.TB_Vendas_AllValor_Total.Value :=  StrToFloat(FFinaliza.Mer_Tot[i]);
+banco.TB_Vendas_AllQuantiBaixa.Value := StrToFloat(FFinaliza.Mer__QdSai[i]);
+Banco.TB_Vendas_All.post;
+
+Fcancel.ProgressBar1.Position := Fcancel.ProgressBar1.Position +1;
+Application.ProcessMessages;
+end;
+end;
+
+
+
+if Estagio = 3 then
+begin
+Fcancel.Label1.Caption := 'Alterando tabela de Vendas';
+  Fcancel.ProgressBar1.Position := Fcancel.ProgressBar1.Position +1;
+   For i := 0 to FFinaliza.Lista_Cod_Mer.Count -1 do
+   begin
+   Banco.TB_Vendas_All.close;
+   Banco.TB_Vendas_All.sql.clear;
+   Banco.TB_Vendas_All.SQL.Add('Select * from VENDA_ALL');
+   Banco.TB_Vendas_All.SQL.Add('Where codigo ='+FFinaliza.Lista_Cod_Mer[i]);
+   Banco.TB_Vendas_All.Open;
+
+   if Banco.TB_Vendas_All.RecordCount > 0 then
+   Banco.TB_Vendas_All.Delete;
+
+   Fcancel.ProgressBar1.Position := Fcancel.ProgressBar1.Position +1;
+   Application.ProcessMessages;
+   end;
+end;
+
+
+
+if Estagio = 4 then
+begin
+Fcancel.Label1.Caption := 'Verificando alterações na tabela de Vendas';
+  Fcancel.ProgressBar1.Position := Fcancel.ProgressBar1.Position +1;
+
+   For i := 0 to FFinaliza.LIsta_Cod_Mer_Edit.Count -1 do
+   begin
+   Banco.TB_Vendas_All.close;
+   Banco.TB_Vendas_All.sql.clear;
+   Banco.TB_Vendas_All.SQL.Add('Select * from VENDA_ALL');
+   Banco.TB_Vendas_All.SQL.Add('Where codigo ='+FFinaliza.LIsta_Cod_Mer_Edit[i]);
+   Banco.TB_Vendas_All.Open;
+
+   if Banco.TB_Vendas_All.RecordCount > 0 then
+   Banco.TB_Vendas_All.Edit
+   else
+   begin
+   Banco.TB_Vendas_All.Insert;
+   banco.TB_Vendas_AllID_mercadoria.Value := StrToInt(FFinaliza.Mer_Edit_IDprod[i]);
+   end;
+
+    Banco.TB_Vendas_AllID_Pedido.Value     := FFinaliza.Pedido;
+    Banco.TB_Vendas_AllQtd.Value           := StrToFloat(FFinaliza.Mer_Edit_qtd[i]);
+    Banco.TB_Vendas_AllValor_un.Value      := StrToFloat(FFinaliza.Mer_Edit_value[i]);;
+    Banco.TB_Vendas_AllValor_Total.Value   := StrToFloat(FFinaliza.Mer_Edit_Tot[i]);
+    banco.TB_Vendas_AllQuantiBaixa.Value   := StrToFloat(FFinaliza.Mer_EDit_QdSai[i]);
+    Banco.TB_Vendas_All.post;
+
+
+
+
+   Fcancel.ProgressBar1.Position := Fcancel.ProgressBar1.Position +1;
+   Application.ProcessMessages;
+   end;
+end;
+
+
+if Estagio = 5 then
+begin
+Fcancel.Label1.Caption := 'Cancelando alterações...';
+   Fcancel.ProgressBar1.Position := Fcancel.ProgressBar1.Position +1;
+   Banco.TB_Pedido.cancel;
+   Application.ProcessMessages;
+
+
+Application.ProcessMessages;
+end;
+
+
+if Estagio = 6 then
+if FFinaliza.Editing = false then
+begin
+FFinaliza.DeletePedido;
+
+    Fcancel.Label1.Caption := 'Localizando registro';
+    if FFinaliza.TempCOd <> '' then
+    try
+    banco.TB_Pedido.Bookmark := FFinaliza.TempCOd;
+    except
+    end;
+
+
+end;
+
+if Estagio = 12 then
+close;
+
+end;
+
+
+procedure TFcancel.FormCreate(Sender: TObject);
+begin
+Estagio := 0;
+
+end;
+
+procedure TFcancel.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+if Estagio < 7 then
+CanClose := false
+else
+CanClose := true;
+
+
+end;
+
+end.

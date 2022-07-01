@@ -1,0 +1,146 @@
+unit UAtalho;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ComCtrls, ExtCtrls,Menus, StdCtrls;
+
+type
+  TFAtalho = class(TForm)
+    Image1: TImage;
+    Image2: TImage;
+    Label1: TLabel;
+    HotKey1: THotKey;
+    procedure Image2Click(Sender: TObject);
+    procedure Image1Click(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure HotKey1Change(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Image2MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FAtalho: TFAtalho;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFAtalho.Image2Click(Sender: TObject);
+begin
+ModalResult := mrOk;
+
+end;
+
+procedure TFAtalho.Image1Click(Sender: TObject);
+begin
+ModalResult := mrCancel;
+
+end;
+
+procedure TFAtalho.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+if key = vk_escape then
+ModalResult := mrCancel;
+
+end;
+
+procedure TFAtalho.HotKey1Change(Sender: TObject);
+begin
+//HideCaret(HotKey1.Handle);
+Label1.Caption := ShortCutToText(HotKey1.HotKey); //unit menus
+if Label1.Caption = '' then
+Label1.Caption := 'Nenhum';
+
+
+end;
+
+procedure TFAtalho.FormShow(Sender: TObject);
+begin
+HotKey1Change(HotKey1);
+end;
+
+procedure TFAtalho.FormCreate(Sender: TObject);
+begin
+HotKey1.HotKey := 0;
+
+end;
+
+procedure TFAtalho.Image2MouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+if Image1.Width <> 24 then
+begin
+Image1.Width  := 24;
+Image1.Height := 24;
+Image1.Top := 64;
+Image1.left := 97;
+end;
+
+if (Sender as TImage).Width <> 26 then
+begin
+(sender as TImage).Top := 63;
+(sender as TImage).left := 129;
+(Sender as TImage).Width  := 26;
+(Sender as TImage).Height := 26;
+end;
+
+end;
+
+procedure TFAtalho.FormMouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+if Image2.Width <> 24 then
+begin
+Image2.Width  := 24;
+Image2.Height := 24;
+Image2.Top := 64;
+Image2.left := 130;
+end;
+
+if Image1.Width <> 24 then
+begin
+Image1.Width  := 24;
+Image1.Height := 24;
+Image1.Top := 64;
+Image1.left := 98;
+end;
+
+end;
+
+procedure TFAtalho.Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+if Image2.Width <> 24 then
+begin
+Image2.Width  := 24;
+Image2.Height := 24;
+Image2.Top := 64;
+Image2.left := 130;
+end;
+
+
+if (Sender as TImage).Width <> 26 then
+begin
+(sender as TImage).Top := 63;
+(sender as TImage).left := 98;
+(Sender as TImage).Width  := 26;
+(Sender as TImage).Height := 26;
+end;
+
+end;
+
+end.

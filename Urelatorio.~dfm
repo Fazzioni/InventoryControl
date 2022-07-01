@@ -1,0 +1,7 @@
+object FRelatorio: TFRelatorio
+  OldCreateOrder = False
+  Left = 471
+  Top = 195
+  Height = 333
+  Width = 353
+end

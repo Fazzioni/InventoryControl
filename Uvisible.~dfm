@@ -1,0 +1,47 @@
+object FVisible: TFVisible
+  Left = 325
+  Top = 162
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Colunas'
+  ClientHeight = 337
+  ClientWidth = 137
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  KeyPreview = True
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnKeyDown = FormKeyDown
+  PixelsPerInch = 96
+  TextHeight = 13
+  object CheckListBox1: TCheckListBox
+    Left = 0
+    Top = 0
+    Width = 137
+    Height = 295
+    Align = alClient
+    ItemHeight = 13
+    TabOrder = 0
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 295
+    Width = 137
+    Height = 42
+    Align = alBottom
+    TabOrder = 1
+    object Button1: TButton
+      Left = 8
+      Top = 8
+      Width = 121
+      Height = 25
+      Caption = 'Salvar'
+      TabOrder = 0
+      OnClick = Button1Click
+    end
+  end
+end
