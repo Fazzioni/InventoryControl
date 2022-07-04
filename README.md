@@ -2,7 +2,7 @@
 
 
 <p  align="center">
-<a align="center" href="https://github.com/Fazzioni/InventoryControl/main/README.md#modules" >
+<a align="center" href="#" >
 <img src="https://user-images.githubusercontent.com/79149971/177042816-a589da22-ec0b-4f1d-ba0d-d3b518e02f38.jpg"/>
 </a></p>
 
@@ -30,7 +30,7 @@ but I can say it was fun!
 
 # 📦 Modules
 <p  align="center">
-<a align="center" href="https://github.com/Fazzioni/InventoryControl/main/README.md#modules" >
+<a align="center" href="#" >
 <img src="https://user-images.githubusercontent.com/79149971/177063015-741ea509-0b7c-4535-8078-763ea7e16781.jpg"/>
 </a></p>
 
